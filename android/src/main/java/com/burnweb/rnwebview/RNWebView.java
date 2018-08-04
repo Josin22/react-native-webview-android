@@ -73,13 +73,22 @@ class RNWebView extends WebView implements LifecycleEventListener {
         // For Android 4.1+
         @SuppressWarnings("unused")
         public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
-            getModule().startFileChooserIntent(uploadMsg, acceptType);
+            getModule().startFileChooserIntent(uploadMsg, acceptType,false);
         }
 
         // For Android 5.0+
         @SuppressLint("NewApi")
         public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
-            return getModule().startFileChooserIntent(filePathCallback, fileChooserParams.createIntent());
+            if (Build.VERSION.SDK_INT >= 21) {
+                final boolean allowMultiple = fileChooserParams.getMode() == FileChooserParams.MODE_OPEN_MULTIPLE;
+
+                getModule().startFileChooserIntent(filePathCallback, fileChooserParams.createIntent(),allowMultiple);
+
+                return true;
+            }
+            else {
+                return false;
+            }
         }
     }
 
@@ -191,7 +200,7 @@ class RNWebView extends WebView implements LifecycleEventListener {
     }
 
     @JavascriptInterface
-     public void postMessage(String jsParamaters) {
+    public void postMessage(String jsParamaters) {
         mEventDispatcher.dispatchEvent(new MessageEvent(getId(), jsParamaters));
     }
 }

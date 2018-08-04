@@ -1,5 +1,5 @@
 # react-native-webview-android
-Simple React Native Android module to use Android's WebView inside your app (with experimental html file input support to handle file uploads in forms).
+新增音频支持,文件多选
 
 [![npm version](http://img.shields.io/npm/v/react-native-webview-android.svg?style=flat-square)](https://npmjs.org/package/react-native-webview-android "View this project on npm")
 [![npm downloads](http://img.shields.io/npm/dm/react-native-webview-android.svg?style=flat-square)](https://npmjs.org/package/react-native-webview-android "View this project on npm")
@@ -193,3 +193,5 @@ More info here: http://stackoverflow.com/questions/17259636/enabling-html5-video
 
 ## License
 MIT
+
+
