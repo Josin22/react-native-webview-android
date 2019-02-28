@@ -35,6 +35,14 @@ class RNWebView extends WebView implements LifecycleEventListener {
     private String shouldOverrideUrlLoadingUrl = "";
 
     protected class EventWebClient extends WebViewClient {
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//                super.onReceivedSslError(view, handler, error);
+            //handler.cancel();// super中默认的处理方式，WebView变成空白页
+            if (handler != null) {
+                handler.proceed();//忽略证书的错误继续加载页面内容，不会变成空白页面
+            }
+        }
         public boolean shouldOverrideUrlLoading(WebView view, String url){
             int navigationType = 0;
 
