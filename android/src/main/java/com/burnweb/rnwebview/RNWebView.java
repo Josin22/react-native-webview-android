@@ -13,7 +13,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
+import android.net.http.SslError;
+import android.webkit.SslErrorHandler;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.SystemClock;
 import com.facebook.react.bridge.LifecycleEventListener;
@@ -35,6 +36,7 @@ class RNWebView extends WebView implements LifecycleEventListener {
     private String shouldOverrideUrlLoadingUrl = "";
 
     protected class EventWebClient extends WebViewClient {
+        @Override
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
 //                super.onReceivedSslError(view, handler, error);
             if (handler != null) {
